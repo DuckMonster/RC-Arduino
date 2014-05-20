@@ -1,27 +1,21 @@
-#incluce <RCSwitch.h>
+#include <RCSwitch.h>
 
 RCSwitch mySwitch = RCSwitch();
 
 void setup() {
 	Serial.begin(9600);
 	mySwitch.enableTransmit(12);
-	mySwitch.enableRecieve(10);
 }
 
 void loop() {
-	mySwitch.send(1555, 24);
-	delay(1000);
-	mySwitch.send(1560, 24);
-	delay(1000);
+	char []text = "Hejsan";
 
-	if (mySwitch.available()) {
-		int value = mySwitch.getRecieveValue();
+	int stringSize = 6;
+	mySwitch.send(stringSize, 24);
 
-		if (value == 0) {
-			Serial.println("What is this?");
-		} else {
-			Serial.print("Recieved ");
-			serial.println(value);
-		}
+	for(int i=0; i<stringSize; i++) {
+		mySwitch.send(text[i], 24);
 	}
+
+	delay(500);
 }
